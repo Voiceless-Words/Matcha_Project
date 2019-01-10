@@ -6,8 +6,9 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 //DB connect
-mongoose.connect('mongodb://localhost/matcha');
+mongoose.connect('mongodb://localhost:27017/matcha');
 let db = mongoose.connection;
+let Users = require('./models/users');
 
 //connection successful
 db.once('open', function(){
@@ -18,9 +19,6 @@ db.once('open', function(){
 db.on('error', function(err){
     console.log(err);
 });
-
-//bring in model
-let Users = require('./models/users');
 
 const app = express();
 
@@ -67,7 +65,7 @@ app.post('/sign_up', function(req, res){
         if(err){
             console.log(err);
         }else{
-           res.redirect('/'); 
+           res.redirect('/');
         }
     });
 });

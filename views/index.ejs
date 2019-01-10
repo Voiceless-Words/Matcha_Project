@@ -1,8 +1,117 @@
-<% include partials/header %>
 
-    <h1><%= title%></h1>
-    <%for (let i = 0; i < users.length; i++) { %>
-    <li><%= users[i].first_name %></li>
-    <% } %>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Jekyll v3.8.5">
+        <title>HOME</title>
 
-<% include partials/footer %>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="home()">
+                    HOME
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="signUp()">
+                    Sign Up
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="login()">
+                    Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="questions()">
+                    FAQs
+                    </a>
+                </li>
+                </ul>
+            </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Welcome Love Awaits</h1>
+                </div>
+                <div id="myCanvas" style="display: block;">
+                    <video src="https://www.youtube.com/watch?v=zHNyp-3ELO8" controls="false" autoplay loop style="display: none;"></video>
+                    <canvas class="my-4 w-100" width="900" height="380"></canvas><br><br><br><br><br><br><br><br>
+                </div>
+                <div class="table-responsive">
+                    <div class="container">
+                        <div class="col-md-5" style="display: none;" id="register">
+                            <h2>Register an account</h2><br>
+                            <form action="/sign_up" method="POST">
+                                <label>First Name</label><br>
+                                <input type="text" name="first_name" class="form-control" required>
+                                <br>
+                                <label>Last Name</label><br>
+                                <input type="text" name="last_name" class="form-control" required>
+                                <br>
+                                <label>Username</label><br>
+                                <input type="text" name="username" class="form-control" required>
+                                <br>
+                                <label>Email</label><br>
+                                <input type="email" name="email" class="form-control" required>
+                                <br>
+                                <label>Password</label><br>
+                                <input type="password" name="password" class="form-control" required>
+                                <br>
+                                <label>Confirm Passwrord</label><br>
+                                <input type="password" name="confirm_password" class="form-control" required>
+                                <br><br>
+                                <input type="submit" value="Sign Up">
+                            </form><br><br><br><br><br><br><br>
+                        </div>
+
+                        <div class="col-md-5" style="display: none;" id="login">
+                            <h2>Login </h2><br>
+                            <form action="/login" method="POST">
+                                <label>Username</label><br>
+                                <input type="text" name="username" class="form-control" required>
+                                <br>
+                                <label>Password</label><br>
+                                <input type="password" name="password" class="form-control" required>
+                                <br>
+                                <input type="submit" value="Login">
+                            </form>
+                        </div>
+
+                        <div class="col-md-5" style="display: none;" id="questions">
+                            <h2>FAQs</h2><br>
+                                <p>questions from the database goes here</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <footer class="page-footer"><p style="text-align: center;">Copyright Reserved &copy; 2019</p></footer>
+        <script src="home.js"></script>
+    </body>
+</html>

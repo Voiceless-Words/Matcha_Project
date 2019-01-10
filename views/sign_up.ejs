@@ -1,27 +1,29 @@
 <% include partials/header %>
 
     <h1>Sign Up</h1>
-    <div class="container-fluid">
-        <form action="sign_up" method="POST">
-            <label>First Name</label><br>
-            <input type="text" name="first_name" class="form-control" required>
-            <br>
-            <label>Last Name</label><br>
-            <input type="text" name="last_name" class="form-control" required>
-            <br>
-            <label>Username</label><br>
-            <input type="text" name="username" class="form-control" required>
-            <br>
-            <label>Email</label><br>
-            <input type="email" name="email" class="form-control" required>
-            <br>
-            <label>Password</label><br>
-            <input type="password" name="password" class="form-control" required>
-            <br>
-            <label>Confirm Passwrord</label><br>
-            <input type="password" name="confirm_password" class="form-control" required>
-            <br><br>
-            <input type="submit" value="Sign Up">
-        </form>
+    <div class="container">
+        <div class="col-md-5">
+            <form action="sign_up" method="POST">
+                <label>First Name</label><br>
+                <input type="text" name="first_name" class="form-control" required>
+                <br>
+                <label>Last Name</label><br>
+                <input type="text" name="last_name" class="form-control" required>
+                <br>
+                <label>Username</label><br>
+                <input type="text" name="username" class="form-control" required>
+                <br>
+                <label>Email</label><br>
+                <input type="email" name="email" class="form-control" required>
+                <br>
+                <label>Password</label><br>
+                <input type="password" name="password" class="form-control" required>
+                <br>
+                <label>Confirm Passwrord</label><br>
+                <input type="password" name="confirm_password" class="form-control" required>
+                <br><br>
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
     </div>
 <% include partials/footer %>
