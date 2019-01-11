@@ -10,8 +10,11 @@
         <title>HOME</title>
 
         <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -59,16 +62,16 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Welcome Love Awaits</h1>
                 </div>
-                <div id="myCanvas" style="display: block;">
-                    <video src="https://www.youtube.com/watch?v=zHNyp-3ELO8" controls="false" autoplay loop style="display: none;"></video>
-                    <canvas class="my-4 w-100" width="900" height="380"></canvas><br><br><br><br><br><br><br><br>
+                <div id="myCanvas" style="display: block; margin-bottom: 9%;">
+                <div id="player"></div>
+                    <canvas class="my-4 w-100" width="900" height="380" style="border: solid 1px black" id="icanvas"></canvas>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" >
                     <div class="container">
-                        <div class="col-md-5" style="display: none;" id="register">
-                            <h2>Register an account</h2><br>
+                        <div class="col-md-5" style="display: none; margin-left: 30%; margin-top: 10%; margin-bottom: 5%;" id="register">
+                            <h2 style="color: antiquewhite">Register an account</h2><br>
                             <form action="/sign_up" method="POST">
-                                <label>First Name</label><br>
+                                <label style="color: antiquewhite">First Name</label><br>
                                 <input type="text" name="first_name" class="form-control" required>
                                 <br>
                                 <label>Last Name</label><br>
@@ -87,11 +90,12 @@
                                 <input type="password" name="confirm_password" class="form-control" required>
                                 <br><br>
                                 <input type="submit" value="Sign Up">
-                            </form><br><br><br><br><br><br><br>
+                                <br><br>
+                            </form>
                         </div>
 
-                        <div class="col-md-5" style="display: none;" id="login">
-                            <h2>Login </h2><br>
+                        <div class="col-md-5" style="display: none; margin-bottom:27%; margin-left: 30%; margin-top: 25%;" id="login"c>
+                            <h2 style="color: antiquewhite">Login </h2><br>
                             <form action="/login" method="POST">
                                 <label>Username</label><br>
                                 <input type="text" name="username" class="form-control" required>

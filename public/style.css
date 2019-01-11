@@ -2,13 +2,20 @@ input[type=button], input[type=submit], input[type=reset] {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 16px 32px;
     text-decoration: none;
-    margin: 4px 2px;
     cursor: pointer;
+    margin-left: 2.5%;
     width: 70%;
   }
   input[type=text], input[type=password], input[type=email]{
       cursor: pointer;
       width: 75%;
+  }
+
+  label{
+      color: antiquewhite;
+  }
+  .table-responsive{
+      background-image: url("chrome-extension://kkbddiipigijaahocdhgjdnkcbmiapib/start/skin/images/bg-61.jpg");
+      background-size: cover;
   }
