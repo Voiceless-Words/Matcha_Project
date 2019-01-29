@@ -2,23 +2,12 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const dotenv = require('dotenv').config();
 
 //DB connect
-mongoose.connect('mongodb://localhost:27017/matcha');
-let db = mongoose.connection;
+mongoose.set('useCreateIndex', true);
+let db = mongoose.connect('mongodb+srv://hyper:'+process.env.DB_PASSWORD+'@matchacluster-e6mcr.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
 let Users = require('./models/users');
-
-//connection successful
-db.once('open', function(){
-    console.log('Connected to mongodb');
-});
-
-//check for db errors
-db.on('error', function(err){
-    console.log(err);
-});
 
 const app = express();
 
@@ -58,9 +47,7 @@ app.post('/sign_up', function(req, res){
     user.last_name = req.body.last_name;
     user.username = req.body.username;
     user.email = req.body.email;
-    let salt = bcrypt.genSaltSync(saltRounds)
-    let hash = bcrypt.hashSync(req.body.password, salt);
-    user.password = hash;
+    user.password = req.body.password;
     user.save(function(err){
         if(err){
             console.log(err);

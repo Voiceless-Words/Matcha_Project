@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
-var SALT_WORK_FACTOR = 10;
+var bcrypt = require('bcryptjs');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -16,7 +15,7 @@ userSchema.pre('save', function(next){
 
     if(!user.isModified('password')) return next();
 
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+    bcrypt.genSalt(process.env.SALT_WORK_FACTOR, function(err, salt){
         if (err) return next(err);
 
         bcrypt.hash(user.password, salt, function(err, hash){
@@ -36,4 +35,4 @@ userSchema.methods.comparePassword = function(candidatePassword, cb){
     });
 };
 
-module.exports = mongoose.model('Users', 'userSchema');
+module.exports = mongoose.model('Users', userSchema);
