@@ -6,7 +6,7 @@ const dotenv = require('dotenv').config();
 
 //DB connect
 mongoose.set('useCreateIndex', true);
-let db = mongoose.connect('mongodb+srv://hyper:'+process.env.DB_PASSWORD+'@matchacluster-e6mcr.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
+let db = mongoose.connect("mongodb+srv://hyper:"+process.env.DB_PASSWORD+"@matchacluster-e6mcr.mongodb.net/Matcha?retryWrites=true", {useNewUrlParser: true});
 let Users = require('./models/users');
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
-    Users.find({}, function(err, users){
+    /*Users.find({}, function(err, users){
         if(err)
         {
             console.log(err);
@@ -32,27 +32,25 @@ app.get('/', function(req, res){
                 users : users
             });
         }
-    });
-});
-
-//Sign up Route
-app.get('/sign_up', function(req, res){
-    res.render('sign_up');
+    });*/
+    res.render('index');
 });
 
 //sign up post
 app.post('/sign_up', function(req, res){
-    let user = new Users();
-    user.first_name = req.body.first_name;
-    user.last_name = req.body.last_name;
-    user.username = req.body.username;
-    user.email = req.body.email;
-    user.password = req.body.password;
-    user.save(function(err){
+    let user = {
+    firstname: req.body.first_name,
+    lastname: req.body.last_name,
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  };
+    Users.create(user, function(err, doc){
         if(err){
             console.log(err);
         }else{
-           res.redirect('/');
+           console.log(doc);
+           res.render('index');
         }
     });
 });
