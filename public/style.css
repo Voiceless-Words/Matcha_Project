@@ -13,9 +13,13 @@ input[type=button], input[type=submit], input[type=reset] {
   }
 
   label{
-      color: antiquewhite;
+      color: back;
   }
   .table-responsive{
-      background-image: url("chrome-extension://kkbddiipigijaahocdhgjdnkcbmiapib/start/skin/images/bg-61.jpg");
+      background-image: url("matcha.jpg");
       background-size: cover;
   }
+
+  /*body{
+    background-image: url("matcha.jpg");
+  }*/

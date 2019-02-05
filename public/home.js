@@ -1,31 +1,3 @@
-var player;
-
-function  onYouTubeIframeAPIReady(){
-player = new YT.Player('player', {
-    height: '380',
-    width: '900',
-    videoId: 'tqErAlg-QJU',
-    events: {
-      'onReady': function (e) {
-        e.target.playVideo();
-        // pause video after 3 seconds
-        setTimeout(function() {
-          player.pauseVideo();
-        }, 3 * 1000);
-      },
-      'onStateChange': function (e) {
-        // if video ended (0) or paused (2)....
-        if (e.data == 0 || e.data == 2) {
-          // remove the player
-          player.destroy();
-          // toggle the visibility
-          $('#icanvas, #player').toggle();
-        }
-      }
-    }
-  });
-}
-
 //$(function(){
   //  $('#icanvas').hide();
 //});
