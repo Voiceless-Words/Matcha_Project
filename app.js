@@ -22,9 +22,9 @@ let Users = require('./models/users');
 const app = express();
 
 app.use(session({
-secret: 'botnyuserdetails', // session secret
-resave: true,
-saveUninitialized: true
+secret: process.env.SECRET_IS_MINE, // session secret
+resave: false,
+saveUninitialized: false
 }));
 
 app.set('view engine', 'ejs');
@@ -33,6 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+
 //set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -40,72 +41,54 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
-function checkSignIn(req, res){
-  if (req.session.user){
-    next();
-  }else {
-    var err = new Error("You are not logged in Dumb Ass");
-    console.log(req.session.user);
-    next(err);
-  }
-}
+//home route
+app.get('/home', function(req, res){
+  res.render('index');
+});
 
-app.get('/home', checkSignIn, function(req, res){
-  res.render('/home', {username: req.session.user.username});
-})
+//login route
+app.get('/login', function(req, res){
+  res.render('login');
+});
 
-app.post('/login', function(req, res){
-  if(!req.body.username || !req.body.password){
-    res.render('index', {message:"Please enter both username and password"});
-  }else {
+//sign up route
+app.get('/sign_up', function(req, res){
+  res.render('sign_up');
+});
+
+//sign up post
+app.post('/sign_up', function(req, res){
+  if (req.body.first_name && req.body.last_name && req.body.username && req.body.email && req.body.password){
     Users.findOne({'username': req.body.username}, function(err, user){
       if (err)
       {
         console.log(err);
       }else{
         console.log(user);
-        bcrypt.compare(req.body.password, user.password, function(err, res){
-          if (err){
-            console.log(err);
-          }
-        });
-        req.session.user = user;
-        res.redirect('home');
+        if (!user){
+          let user = {
+          firstname: req.body.first_name,
+          lastname: req.body.last_name,
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password
+        };
+          Users.create(user, function(err, doc){
+              if(err){
+                  console.log(err);
+              }else{
+                 console.log(doc);
+                 res.render('sign_up', {message: "The user account was created successfully"});
+              }
+          });
+        }else {
+          res.render('sign_up', {message: "The user already exists"});
+        }
     }
     });
-    res.render('index', {message: "Invalid credentials Dumb ass"});
+  }else {
+    res.render('sign_up', {message: "PLease make sure that all the required field are filled"});
   }
-});
-
-app.get('logout', function(req, res){
-  req.session.destroy(function(){
-    console.log("You logged out sir");
-  });
-  res.redirect('index');
-});
-
-app.use('/home', function(err, req, res, next){
-  console.log(err);
-  res.redirect('/index');
-});
-
-//sign up post
-app.post('/sign_up', function(req, res){
-    let user = {
-    firstname: req.body.first_name,
-    lastname: req.body.last_name,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  };
-    Users.create(user, function(err, doc){
-        if(err){
-            console.log(err);
-        }else{
-           console.log(doc);
-           res.render('index');
-        }
-    });
 });
 
 app.listen(3000, function(){

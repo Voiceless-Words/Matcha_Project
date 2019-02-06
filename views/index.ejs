@@ -1,118 +1,68 @@
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Jekyll v3.8.5">
-        <title>HOME</title>
-
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-            }
-        }
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" onclick="home()">
-                    HOME
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="signUp()">
-                    Sign Up
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="login()">
-                    Login
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="questions()">
-                    FAQs
-                    </a>
-                </li>
-                </ul>
-            </div>
-            </nav>
-
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Welcome Love Awaits</h1>
-                </div>
-                <div id="myCanvas" style="display: block; margin-bottom: 9%;">
-                </div>
-                <div class="table-responsive" >
-                    <div class="container">
-                        <div class="col-md-5" style="display: none; margin-left: 30%; margin-top: 10%; margin-bottom: 5%;" id="register">
-                            <h2 style="color: black">Register an account</h2><br>
-                            <form action="/sign_up" method="POST">
-                                <label style="color: black">First Name</label><br>
-                                <input type="text" name="first_name" class="form-control" required>
-                                <br>
-                                <label>Last Name</label><br>
-                                <input type="text" name="last_name" class="form-control" required>
-                                <br>
-                                <label>Username</label><br>
-                                <input type="text" name="username" class="form-control" required>
-                                <br>
-                                <label>Email</label><br>
-                                <input type="email" name="email" class="form-control" required>
-                                <br>
-                                <label>Password</label><br>
-                                <input type="password" name="password" class="form-control" required>
-                                <br>
-                                <label>Confirm Passwrord</label><br>
-                                <input type="password" name="confirm_password" class="form-control" required>
-                                <br><br>
-                                <input type="submit" value="Sign Up">
-                                <br><br>
-                            </form>
-                        </div>
-
-                        <div class="col-md-5" style="display: none; margin-bottom:27%; margin-left: 30%; margin-top: 25%;" id="login"c>
-                            <h2 style="color: black">Login </h2><br>
-                            <form action="/login" method="POST">
-                                <label>Username</label><br>
-                                <input type="text" name="username" class="form-control" required>
-                                <br>
-                                <label>Password</label><br>
-                                <input type="password" name="password" class="form-control" required>
-                                <br>
-                                <input type="submit" value="Login">
-                            </form>
-                        </div>
-
-                        <div class="col-md-5" style="display: none;" id="questions">
-                            <h2>FAQs</h2><br>
-                                <p>questions from the database goes here</p>
-                        </div>
-                    </div>
-                </div>
-            </main>
+<html>
+<head>
+<title>Matcha</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,100' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<header class="main__header">
+  <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="collapse navbar-center navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/home">Home</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/sign_up">Sign Up</a></li>
+          <li><a href="contact.html">contact us</a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <h1 class="navbar-brand"><a href="index.html">Matcha</a></h1>
+      </div>
+    </nav>
+  </div>
+</header>
+<section class="slider">
+  <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="item"> <img data-src="images/slider/image_1920x770.jpg" alt="First slide" src="images/slider/image_1920x770.jpg">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Looking for love <span>this is the </span> right place </h1>
+            <p>Blah blah blah love. </p>
+            <p><a class="btn btn-default" href="#" role="button">Get Started</a></p>
+          </div>
         </div>
-        <footer class="page-footer"><p style="text-align: center;">Copyright Reserved &copy; 2019</p></footer>
-        <script src="home.js"></script>
-    </body>
+      </div>
+      <div class="item active"> <img data-src="images/slider/image_1920x770.jpg" alt="Second slide" src="images/slider/image_1920x770.jpg">
+        <div class="container">
+          <div class="carousel-caption">
+            <p><a class="btn btn-default" href="#" role="button">get started</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon carousel-control-left"></span></a> <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon carousel-control-right"></span></a> </div>
+</section>
+<footer>
+  <div class="copy">
+    <p class="text-center">&copy; Copyright Matcha. All Rights Reserved.</p>
+  </div>
+</footer>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+$('.carousel').carousel({
+  interval: 3500,
+  pause: 'none'
+})
+
+</script>
+</body>
 </html>
