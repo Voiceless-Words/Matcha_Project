@@ -1,13 +1,4 @@
-
-<html>
-<head>
-<title>Matcha</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,100' rel='stylesheet' type='text/css'>
-<link href="css/style.css" rel="stylesheet">
-</head>
-<body>
+<% include partials/header %>
 <header class="main__header">
   <div class="container">
     <nav class="navbar navbar-default" role="navigation">
@@ -16,13 +7,12 @@
           <li class="active"><a href="/home">Home</a></li>
           <li><a href="/login">Login</a></li>
           <li><a href="/sign_up">Sign Up</a></li>
-          <li><a href="contact.html">contact us</a></li>
         </ul>
       </div>
       <div class="clr"></div>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <h1 class="navbar-brand"><a href="index.html">Matcha</a></h1>
+        <h1 class="navbar-brand"  style="background: transparent"><a href="/">Matcha</a></h1>
       </div>
     </nav>
   </div>
@@ -30,19 +20,21 @@
 <section class="slider">
   <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="item"> <img data-src="images/slider/image_1920x770.jpg" alt="First slide" src="images/slider/image_1920x770.jpg">
+      <div class="item"> <img data-src="images/slider/slider1.jpg" alt="First slide" src="images/slider/slider1.jpg">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Looking for love <span>this is the </span> right place </h1>
-            <p>Blah blah blah love. </p>
-            <p><a class="btn btn-default" href="#" role="button">Get Started</a></p>
+            <h1><span>You deserve</span> love and you will get it </h1>
+            <p>Every love story begin with a greeting. </p>
+            <p><a class="btn btn-default" href="/sign_up" role="button">Get Started</a></p>
           </div>
         </div>
       </div>
-      <div class="item active"> <img data-src="images/slider/image_1920x770.jpg" alt="Second slide" src="images/slider/image_1920x770.jpg">
+      <div class="item active"> <img data-src="images/slider/slider2.jpg" alt="Second slide" src="images/slider/slider2.jpg">
         <div class="container">
           <div class="carousel-caption">
-            <p><a class="btn btn-default" href="#" role="button">get started</a></p>
+            <h1>Something tells me you are going to find <span>the one</span> </h1>
+            <p>We are going to put an everyday smile on your face.</p>
+            <p><a class="btn btn-default" href="/sign_up" role="button">get started</a></p>
           </div>
         </div>
       </div>

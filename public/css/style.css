@@ -11,7 +11,7 @@ a, input, button {
 }
 body {
 	font-family: Calibri, sans-serif;
-	background: #fff;
+	background-image: url("../images/background1.jpg");
 	color: #9e9ba8;
 }
 /*Header*/
