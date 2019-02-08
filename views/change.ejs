@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav">
           <li><a href="/home">Home</a></li>
           <li><a href="/login">Login</a></li>
-          <li class="active"><a href="/sign_up">Sign Up</a></li>
+          <li><a href="/sign_up">Sign Up</a></li>
         </ul>
       </div>
       <div class="clr"></div>
@@ -20,56 +20,44 @@
 <section class="main__middle__container">
   <section class="recent-posts">
     <div class="container">
-      <h2 class="text-center with__margin"><span style="background: #F9F7F7">Sign Up</span></h2>
+      <h2 class="text-center with__margin"><span style="background: #F9F7F7">Change Password</span></h2>
       <div class="row">
         <div class="col-md-8 sign">
-          <ul>
+					<ul>
             <% if(message == "hello"){%>
             <li style="display: none"><%= message %></li>
           <%}else {%>
-            <li class="yes"><%= message %><span class="close">x</span></li>
+            <li><%= message %><span class="close">x</span></li>
           <%}%>
           </ul>
-          <form role="form" id="contact-form" name="contact-form" method="post" action="/sign_up" class="contact-form">
-            <div class="form-group col-md-6">
-              <label  for="name">First Name</label>
-              <input required type="text" class="form-control" name="first_name">
-            </div>
-						<div class="form-group col-md-6">
-							<label  for="name">Last Name</label>
-							<input required type="text" class="form-control" name="last_name">
+          <form role="form" id="contact-form" name="contact-form" method="post" action="/change" class="contact-form">
+						<div class="form-group col-md-6" style="display:none">
+							<label  for="password">username</label>
+							<input required type="text" class="form-control" id="username" name="username" value=" <%= username%>">
 						</div>
             <div class="form-group col-md-6">
-              <label  for="email">Email</label>
-              <input required type="email" class="form-control" id="email" name="email">
+              <label  for="password">Password</label>
+              <input required type="password" class="form-control" id="password" name="password">
             </div>
-						<div class="form-group col-md-6">
-							<label  for="email">Username</label>
-							<input required type="text" class="form-control" id="username" name="username">
-						</div>
             <div class="form-group col-md-6">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password">
+              <label for="password">Confirm Password</label>
+              <input type="password" class="form-control" id="confirm_password" name="confirm_password">
             </div>
-						<div class="form-group col-md-6">
-							<label for="password">Confirm Password</label>
-							<input type="password" class="form-control" id="confirm_password" name="confirm_password">
-						</div>
-            <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Sign Up">
+            <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Change Password">
           </form>
         </div>
       </div>
     </div>
   </section>
 </section>
-<footer>
+<footer style="margin-top: 160px">
   <div class="copy">
     <p class="text-center">&copy; Copyright Matcha. All Rights Reserved.</p>
   </div>
 </footer>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/validation.js"></script>
 <script src="js/close.js"></script>
+<script src="js/validation.js"></script>
 </body>
 </html>

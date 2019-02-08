@@ -20,28 +20,26 @@
 <section class="main__middle__container">
   <section class="recent-posts">
     <div class="container">
-      <h2 class="text-center with__margin"><span style="background: #F9F7F7">Login</span></h2>
+      <h2 class="text-center with__margin"><span style="background: #F9F7F7">Recover Password</span></h2>
       <div class="row">
         <div class="col-md-8 sign">
 					<ul>
             <% if(message == "hello"){%>
             <li style="display: none"><%= message %></li>
-          <%}else {%>
-            <li><%= message %><span class="close">x</span></li>
+          <%}else if (message == "Verify"){%>
+            <li>Please verify, <a href="http://localhost:3000/resend">click here</a> to resend the link<span class="close">x</span></li>
+          <%} else {%>
+            <li> <%= message %><span class="close">x</span></li>
           <%}%>
           </ul>
-          <form role="form" id="contact-form" name="contact-form" method="post" action="/login" class="contact-form">
+          <form role="form" id="contact-form" name="contact-form" method="post" action="/forgot" class="contact-form">
 						<div class="form-group col-md-6">
-							<label  for="email">Username</label>
-							<input required type="text" class="form-control" id="username" name="username">
+							<label  for="email">Email</label>
+							<input required type="email" class="form-control" id="email" name="email">
 						</div>
-            <div class="form-group col-md-6">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Login">
+            <br>
+            <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Reset Password">
           </form>
-					<a href="/recover">Forgot Password?</a>
         </div>
       </div>
     </div>

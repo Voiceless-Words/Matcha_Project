@@ -9,15 +9,6 @@ function _(id) {
    const username = _('username');
    const pass_val = new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@])(?=.{8,16})");
 
-
-    var closebtns = document.getElementsByClassName("close");
-    var i;
-
-    for (i = 0; i < closebtns.length; i++) {
-      closebtns[i].addEventListener("click", function() {
-      this.parentElement.style.display = 'none';
-    });
-  }
    function validate_pass() {
 
        if (password.value === confirm_password.value) {
