@@ -9,6 +9,15 @@ function _(id) {
    const username = _('username');
    const pass_val = new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@])(?=.{8,16})");
 
+
+    var closebtns = document.getElementsByClassName("close");
+    var i;
+
+    for (i = 0; i < closebtns.length; i++) {
+      closebtns[i].addEventListener("click", function() {
+      this.parentElement.style.display = 'none';
+    });
+  }
    function validate_pass() {
 
        if (password.value === confirm_password.value) {
@@ -16,16 +25,6 @@ function _(id) {
        }
        else {
            confirm_password.setCustomValidity("Passwords Don't Match Dumb Ass");
-       }
-
-   }
-
-   function validate_email() {
-
-       if (email.value === confirm_email.value) {
-           confirm_email.setCustomValidity('');
-       } else {
-           confirm_email.setCustomValidity("Emails Don't Match Dumb Ass");
        }
    }
 
@@ -39,7 +38,5 @@ function _(id) {
 
    password.onchange = check_regex;
    password.onkeyup = check_regex;
-   email.onchange = validate_email;
-   confirm_email.onkeyup = validate_email;
    password.onchange = validate_pass;
    confirm_password.onkeyup = validate_pass;

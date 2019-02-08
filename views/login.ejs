@@ -1,23 +1,4 @@
-<html>
-<head>
-<title>Matcha</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,100' rel='stylesheet' type='text/css'>
-<link href="css/style.css" rel="stylesheet">
-<style>
-#feedback {
-	color: #1c6107;
-}
-#feedback ul {
-	padding-left: 0;
-}
-#feedback ul li {
-	list-style: none;
-}
-</style>
-</head>
-<body>
+<% include partials/header %>
 <header class="main__header">
   <div class="container">
     <nav class="navbar navbar-default" role="navigation">
@@ -41,7 +22,14 @@
     <div class="container">
       <h2 class="text-center with__margin"><span style="background: #F9F7F7">Login</span></h2>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 sign">
+					<ul>
+            <% if(message == "hello"){%>
+            <li style="display: none"><%= message %></li>
+          <%}else {%>
+            <li><%= message %><span class="close">x</span></li>
+          <%}%>
+          </ul>
           <form role="form" id="contact-form" name="contact-form" method="post" action="/login" class="contact-form">
 						<div class="form-group col-md-6">
 							<label  for="email">Username</label>
@@ -65,5 +53,6 @@
 </footer>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/validation.js"></script>
 </body>
 </html>
