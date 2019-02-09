@@ -101,54 +101,65 @@ app.post('/sign_up', function(req, res){
         console.log(err);
       }else{
         if (!user){
-          const tokgen = new tokenGen(256, tokenGen.BASE62);
-          let tkn = tokgen.generate();
-          let user = {
-          firstname: req.body.first_name,
-          lastname: req.body.last_name,
-          username: req.body.username,
-          email: req.body.email,
-          token: tkn,
-          status: '0',
-          password: req.body.password
-        };
-          Users.create(user, function(err, doc){
-              if(err){
-                  console.log(err);
-              }else{
-                let transpoter = nodeMailer.createTransport({
-                  host: 'smtp.gmail.com',
-                  port: 465,
-                  secure: true,
-                  auth: {
-                    user: 'pietthabiso@gmail.com',
-                    pass: 'Thabiso1992'
-                  },
-                  tls: {
-                    rejectUnauthorized: false
-                  }
+          Users.findOne({'email': req.body.email}, function(err, user1){
+            if(err){
+              console.log(err);
+            }else {
+              console.log(user1);
+              if (!user1){
+                const tokgen = new tokenGen(256, tokenGen.BASE62);
+                let tkn = tokgen.generate();
+                let user = {
+                firstname: req.body.first_name,
+                lastname: req.body.last_name,
+                username: req.body.username,
+                email: req.body.email,
+                token: tkn,
+                status: '0',
+                password: req.body.password
+              };
+                Users.create(user, function(err, doc){
+                    if(err){
+                        console.log(err);
+                    }else{
+                      let transpoter = nodeMailer.createTransport({
+                        host: 'smtp.gmail.com',
+                        port: 465,
+                        secure: true,
+                        auth: {
+                          user: process.env.USER_EMAIL,
+                          pass: process.env.USER_EMAIL_SEPHIRI
+                        },
+                        tls: {
+                          rejectUnauthorized: false
+                        }
+                      });
+                      let mailOptions = {
+                        from: '"Matcha" <pietthabiso@gmail.com>',
+                        to: req.body.email,
+                        subject: 'Verify Your Account',
+                        text: "Please verify your address",
+                        html: '<a href="http://localhost:3000/verify?token='+ tkn + '">Click Here</a>'
+                      };
+                      transpoter.sendMail(mailOptions, function(error, info){
+                        if (error){
+                          return console.log(error);
+                        }
+                        console.log("Message %s was sent %s", info.messageId, info.response);
+                      });
+                       res.render('sign_up', {message: "The user account was created successfully check email to verify the account"});
+                    }
                 });
-                let mailOptions = {
-                  from: '"Matcha" <pietthabiso@gmail.com>',
-                  to: req.body.email,
-                  subject: 'Verify Your Account',
-                  text: "Please verify your address",
-                  html: '<a href="http://localhost:3000/verify?token='+ tkn + '">Click Here</a>'
-                };
-                transpoter.sendMail(mailOptions, function(error, info){
-                  if (error){
-                    return console.log(error);
-                  }
-                  console.log("Message %s was sent %s", info.messageId, info.response);
-                });
-                 res.render('sign_up', {message: "The user account was created successfully check email to verify the account"});
+              }else {
+                res.render('sign_up', {message: "The email already exists"});
               }
+            }
+            });
+            }else {
+                res.render('sign_up', {message: "The user already exists"});
+              }
+          }
           });
-        }else {
-          res.render('sign_up', {message: "The user already exists"});
-        }
-    }
-    });
   }else {
     res.render('sign_up', {message: "PLease make sure that all the required field are filled"});
   }
@@ -169,8 +180,8 @@ app.post('/forgot', function(req, res){
           port: 465,
           secure: true,
           auth: {
-            user: 'pietthabiso@gmail.com',
-            pass: 'Thabiso1992'
+            user: process.env.USER_EMAIL,
+            pass: process.env.USER_EMAIL_SEPHIRI
           },
           tls: {
             rejectUnauthorized: false
@@ -232,20 +243,24 @@ app.post('/change', function(req, res){
   console.log(req.body.username);
   let val;
   bcrypt.genSalt(process.env.SALT_WORK_FACTOR, function(err, salt){
-      if (err) return next(err);
-
+      if (err){
+        console.log(err);
+      }else {
       bcrypt.hash(req.body.password, salt, null, function(err, hash){
           if (err) {
             console.log(err);
+          }else {
+            val = hash;
+            console.log(val);
+            Users.findOneAndUpdate({'username': req.body.username}, {'password': val}, {upsert: true}, function(err, doc){
+              if (err) {
+                console.log(err);
+              }else {
+                console.log(doc);
+              }
+            });
           }
-           val = hash;
       });
-  });
-  Users.findOneAndUpdate({'username': req.body.username}, {'token': "0", 'password': val}, {upsert: true}, function(err, doc){
-    if(err){
-      console.log(err);
-    }else {
-      console.log(doc);
     }
   });
   res.render('login', {message: "Password was successfully changed, you may now login"});
@@ -266,8 +281,8 @@ app.post('/resend', function(req, res){
           port: 465,
           secure: true,
           auth: {
-            user: 'pietthabiso@gmail.com',
-            pass: 'Thabiso1992'
+            user: process.env.USER_EMAIL,
+            pass: process.env.USER_EMAIL_SEPHIRI
           },
           tls: {
             rejectUnauthorized: false
@@ -300,6 +315,34 @@ app.post('/resend', function(req, res){
       res.render('resend', {message: "The user does not exist"});
     }
   });
+});
+
+//login into the app
+app.post('/login', function(req, res){
+  Users.findOne({'username': req.body.username}, function(err, user){
+    if(err){
+      console.log(err);
+      res.render('login', {message: "Make sure that you are connected to the internet"});
+    }else {
+      if(!user){
+        bcrypt.compare(req.body.password, user.password, function(err, response){
+          if (err){
+            console.log(err);
+            res.render('login', {message: "Make sure you are connected to the internet"});
+          }else if (respose == true){
+            res.render('home');
+          }else if (response == false){
+            res.render('login', {message: "Bad credentials"});
+          }
+        });
+      }else {
+        res.render('login', {message: "Bad credentials"})
+      }
+      console.log(user);
+    }
+  });
+    console.log("let's now login");
+    res.end();
 });
 
 app.listen(3000, function(){

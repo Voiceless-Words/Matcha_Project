@@ -15,7 +15,7 @@ function _(id) {
            confirm_password.setCustomValidity('');
        }
        else {
-           confirm_password.setCustomValidity("Passwords Don't Match Dumb Ass");
+           confirm_password.setCustomValidity("Passwords Don't Match");
        }
    }
 
