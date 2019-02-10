@@ -43,9 +43,24 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
+function checkSignedIn(req, res, next){
+  if(req.session.user){
+    next();
+  }else{
+    let err = new Error("Not logged in!");
+    console.log(req.session.user);
+    next(err);
+  }
+}
+
 //home route
-app.get('/home', function(req, res){
-  res.render('index');
+app.get('/home', checkSignedIn, function(req, res){
+  res.render('home');
+});
+
+//welcome route
+app.get('/welcome', checkSignedIn, function(req, res){
+  res.render('welcome');
 });
 
 //recover Password
@@ -324,27 +339,65 @@ app.post('/login', function(req, res){
       console.log(err);
       res.render('login', {message: "Make sure that you are connected to the internet"});
     }else {
-      if(!user){
+      if(user){
         bcrypt.compare(req.body.password, user.password, function(err, response){
           if (err){
             console.log(err);
             res.render('login', {message: "Make sure you are connected to the internet"});
-          }else if (respose == true){
-            res.render('home');
+          }else if (response == true){
+            if (user.status == "1"){
+              Users.findOneAndUpdate({'username': user.username}, {'status': "2"}, {upsert: true}, function(err, doc){
+                if(err){
+                  console.log(err);
+                }else {
+                  console.log(doc + " updated the status");
+                }
+              });
+              req.session.user = user;
+              res.redirect('/welcome');
+            }else{
+              req.session.user = user;
+              res.redirect('/home');
+          }
           }else if (response == false){
-            res.render('login', {message: "Bad credentials"});
+            res.render('login', {message: "Wrong Password enter the right password or reset if you forgot"});
           }
         });
       }else {
-        res.render('login', {message: "Bad credentials"})
+        res.render('login', {message: "The user does not exists please sign up"});
       }
       console.log(user);
     }
   });
     console.log("let's now login");
-    res.end();
+    //res.end();
+});
+
+//use welcome page
+app.use('/welcome', function(err, req, res, next){
+  console.log(err);
+  res.render('login', {message: "Please make sure you are logged in"});
+});
+
+
+//use home page
+app.use('/home', function(err, req, res, next){
+  console.log(err);
+  res.render('login', {message: "Please make sure you are logged in"});
+});
+
+//logout route
+app.get('/logout', function(req, res){
+  req.session.destroy(function(){
+    console.log("User logged Out");
+    res.render('login', {message: "User logged out"});
+  });
 });
 
 app.listen(3000, function(){
     console.log("Our server has started on port 3000");
-})
+});
+
+app.use(function(req, res) {
+    res.redirect('/');
+});
