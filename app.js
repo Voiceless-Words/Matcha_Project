@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
+const config = require('./config.json');
 const session = require('express-session');
 const bcrypt = require('bcrypt-nodejs');
 const nodeMailer = require('nodemailer');
@@ -10,7 +10,7 @@ const tokenGen = require('uuid-token-generator');
 
 //DB connect
 mongoose.set('useCreateIndex', true);
-mongoose.connect("mongodb+srv://hyper:"+process.env.DB_PASSWORD+"@matchacluster-e6mcr.mongodb.net/test?retryWrites=true", {useNewUrlParser: true}, function(err, db){
+mongoose.connect("mongodb+srv://hyper:thabisoPassword@matchacluster-e6mcr.mongodb.net/test?retryWrites=true", {useNewUrlParser: true}, function(err, db){
   if (err)
   {
     console.log(err);
@@ -24,7 +24,7 @@ let Users = require('./models/users');
 const app = express();
 
 app.use(session({
-secret: process.env.SECRET_IS_MINE, // session secret
+secret: config.SECRET, // session secret
 resave: false,
 saveUninitialized: false
 }));
@@ -142,8 +142,8 @@ app.post('/sign_up', function(req, res){
                         port: 465,
                         secure: true,
                         auth: {
-                          user: process.env.USER_EMAIL,
-                          pass: process.env.USER_EMAIL_SEPHIRI
+                          user: config.E_MAIL,
+                          pass: config.SEPHIRI
                         },
                         tls: {
                           rejectUnauthorized: false
@@ -195,8 +195,8 @@ app.post('/forgot', function(req, res){
           port: 465,
           secure: true,
           auth: {
-            user: process.env.USER_EMAIL,
-            pass: process.env.USER_EMAIL_SEPHIRI
+            user: config.E_MAIL,
+            pass: config.SEPHIRI
           },
           tls: {
             rejectUnauthorized: false
@@ -257,7 +257,7 @@ app.get('/change', function(req, res){
 app.post('/change', function(req, res){
   console.log(req.body.username);
   let val;
-  bcrypt.genSalt(process.env.SALT_WORK_FACTOR, function(err, salt){
+  bcrypt.genSalt(config.SALT_FACTOR, function(err, salt){
       if (err){
         console.log(err);
       }else {
@@ -296,8 +296,8 @@ app.post('/resend', function(req, res){
           port: 465,
           secure: true,
           auth: {
-            user: process.env.USER_EMAIL,
-            pass: process.env.USER_EMAIL_SEPHIRI
+            user: config.E_MAIL,
+            pass: config.SEPHIRI
           },
           tls: {
             rejectUnauthorized: false
@@ -342,7 +342,7 @@ app.post('/login', function(req, res){
       if(user){
         bcrypt.compare(req.body.password, user.password, function(err, response){
           if (err){
-            console.log(err);
+            console.log("eroooooor",err);
             res.render('login', {message: "Make sure you are connected to the internet"});
           }else if (response == true){
             if (user.status == "1"){
