@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const config = require('./config.json');
+const dotenv = require('dotenv').config();
 const session = require('express-session');
 const bcrypt = require('bcrypt-nodejs');
 const nodeMailer = require('nodemailer');
@@ -24,7 +24,7 @@ let Users = require('./models/users');
 const app = express();
 
 app.use(session({
-secret: config.SECRET, // session secret
+secret: process.env.SECRET, // session secret
 resave: false,
 saveUninitialized: false
 }));
@@ -142,8 +142,8 @@ app.post('/sign_up', function(req, res){
                         port: 465,
                         secure: true,
                         auth: {
-                          user: config.E_MAIL,
-                          pass: config.SEPHIRI
+                          user: process.env.E_MAIL,
+                          pass: process.env.SEPHIRI
                         },
                         tls: {
                           rejectUnauthorized: false
@@ -195,8 +195,8 @@ app.post('/forgot', function(req, res){
           port: 465,
           secure: true,
           auth: {
-            user: config.E_MAIL,
-            pass: config.SEPHIRI
+            user: process.env.E_MAIL,
+            pass: process.env.SEPHIRI
           },
           tls: {
             rejectUnauthorized: false
@@ -257,7 +257,7 @@ app.get('/change', function(req, res){
 app.post('/change', function(req, res){
   console.log(req.body.username);
   let val;
-  bcrypt.genSalt(config.SALT_FACTOR, function(err, salt){
+  bcrypt.genSalt(process.env.SALT_FACTOR, function(err, salt){
       if (err){
         console.log(err);
       }else {
@@ -296,8 +296,8 @@ app.post('/resend', function(req, res){
           port: 465,
           secure: true,
           auth: {
-            user: config.E_MAIL,
-            pass: config.SEPHIRI
+            user: process.env.E_MAIL,
+            pass: process.env.SEPHIRI
           },
           tls: {
             rejectUnauthorized: false
