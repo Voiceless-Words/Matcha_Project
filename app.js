@@ -334,7 +334,7 @@ app.post('/resend', function(req, res){
 
 //login into the app
 app.post('/login', function(req, res){
-  Users.findOne({'username': req.body.username}, function(err, user){
+  Users.findOne({$or:[{'username': req.body.username}, {'email': req.body.username}]}, function(err, user){
     if(err){
       console.log(err);
       res.render('login', {message: "Make sure that you are connected to the internet"});
@@ -343,6 +343,7 @@ app.post('/login', function(req, res){
         bcrypt.compare(req.body.password, user.password, function(err, response){
           if (err){
             console.log("eroooooor",err);
+            console.log("Database - ",user.password, " Home ", req.body.password);
             res.render('login', {message: "Make sure you are connected to the internet"});
           }else if (response == true){
             if (user.status == "1"){
