@@ -36,19 +36,42 @@
         <input required type="text" class="form-control" id="username" name="username" readonly value=<%= user.username %> >
       </div>
 
+      <%if (user.gender === "Both") { %>
       <div class="form-group col-md-6">
       <label for="genderPreference">Gender Preference</label>
-      <select class="form-control col-md-6" id="genderPreference">
-        <option selected value="Both">Choose...</option>
+      <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
+        <option value="Both">Choose...</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
-        <option value="Both">Both</option>
+        <option selected  value="Both">Both</option>
       </select>
     </div>
+    <%} else if (user.gender === "Male") {%>
+    <div class="form-group col-md-6">
+        <label for="genderPreference">Gender Preference</label>
+        <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
+            <option value="Both">Choose...</option>
+            <option selected  value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Both">Both</option>
+        </select>
+    </div>
+    <%} else {%>
+    <div class="form-group col-md-6">
+        <label for="genderPreference">Gender Preference</label>
+        <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
+            <option value="Both">Choose...</option>
+            <option value="Male">Male</option>
+            <option selected value="Female">Female</option>
+            <option value="Both">Both</option>
+        </select>
+    </div>
+    <%}%>
+
 
     <div class="form-group col-md-6">
       <label for="gender">Gender</label>
-      <select class="form-control col-md-6" id="gender">
+      <select class="form-control col-md-6" id="gender" name="gender">
         <option selected value="Other">Choose...</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
@@ -58,31 +81,31 @@
       <div >
         <h3  style="background: transparent; text-align: center;"> Select Interests</h3>
       </div>
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <div class="form-group col-md-4">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="LP">
         <label class="form-check-label" for="exampleCheck1">Live Perfomances</label>
       </div>
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Nature Outdoor</label>
+      <div class="form-group col-md-4">
+        <input type="checkbox" class="form-check-input" id="exampleCheck3" name="NO">
+        <label class="form-check-label" for="exampleCheck3">Nature Outdoor</label>
       </div>
 
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Long Walks</label>
+      <div class="form-group col-md-4">
+        <input type="checkbox" class="form-check-input" id="exampleCheck2" name="LW">
+        <label class="form-check-label" for="exampleCheck2">Long Walks</label>
       </div>
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Sports Events</label>
+      <div class="form-group col-md-4">
+        <input type="checkbox" class="form-check-input" id="exampleCheck4" name="SE">
+        <label class="form-check-label" for="exampleCheck4">Sports Events</label>
       </div>
 
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Movies</label>
+      <div class="form-group col-md-4">
+        <input type="checkbox" class="form-check-input" id="exampleCheck5" name="MV">
+        <label class="form-check-label" for="exampleCheck5">Movies</label>
       </div>
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Reading</label>
+      <div class="form-group col-md-4">
+        <input type="checkbox" class="form-check-input" id="exampleCheck6" name="RD">
+        <label class="form-check-label" for="exampleCheck6">Reading</label>
       </div>
       <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Save Changes">
     </form>

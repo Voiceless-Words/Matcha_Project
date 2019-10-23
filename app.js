@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 
 //set public folder
@@ -378,6 +378,26 @@ app.post('/login', function(req, res){
     console.log("let's now login");
     //res.end();
 });
+
+
+//posting information on settings
+app.post('/setup', function(req, res) {
+  console.log("BODY &&&&&&&&&",req.body);
+
+  const {...updateData } = req.body;
+  Users.findOneAndUpdate ({username: req.body.username}, updateData, {new: true}, function(err, doc) {
+    if (err)
+    {
+      console.log("When trying to update", err);
+    }
+    else {
+      console.log(doc, "&&&&&");
+      req.session.user = doc;
+      res.redirect('/settings');
+    }
+  });
+});
+
 
 //use welcome page
 app.use('/welcome', function(err, req, res, next){
