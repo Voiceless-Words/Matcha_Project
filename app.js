@@ -48,7 +48,6 @@ function checkSignedIn(req, res, next){
     next();
   }else{
     let err = new Error("Not logged in!");
-    console.log(req.session.user);
     next(err);
   }
 }
@@ -60,7 +59,7 @@ app.get('/home', checkSignedIn, function(req, res){
 
 //welcome route
 app.get('/welcome', checkSignedIn, function(req, res){
-  res.render('welcome');
+  res.render('welcome',{user: req.session.user});
 });
 
 //recover Password
@@ -76,6 +75,11 @@ app.get('/login', function(req, res){
 //sign up route
 app.get('/sign_up', function(req, res){
   res.render('sign_up', {message:"hello"});
+});
+
+//settings route
+app.get('/settings', function(req, res){
+  res.render('settings', {user: req.session.user});
 });
 
 //resend the verify link
@@ -254,6 +258,7 @@ app.get('/change', function(req, res){
   });
 });
 
+//changing the password
 app.post('/change', function(req, res){
   console.log(req.body.username);
   let val;
@@ -376,13 +381,16 @@ app.post('/login', function(req, res){
 
 //use welcome page
 app.use('/welcome', function(err, req, res, next){
-  console.log(err);
   res.render('login', {message: "Please make sure you are logged in"});
 });
 
-
 //use home page
 app.use('/home', function(err, req, res, next){
+  res.render('login', {message: "Please make sure you are logged in"});
+});
+
+//use settings page
+app.use('/settings', function(err, req, res, next){
   console.log(err);
   res.render('login', {message: "Please make sure you are logged in"});
 });

@@ -8,6 +8,17 @@ var userSchema = new Schema({
     firstname: {type: String, required: true},
     lastname: {type: String, required: true},
     email: {type:String, required: true},
+    gender:{type:String, default: "Other"},
+    genderPreference:{type:String, default: "Both"},
+    interests:{
+        LP: {type: String, default: "No"},
+        NO: {type: String, default: "No"},
+        LW: {type: String, default: "No"},
+        SE: {type: String, default: "No"},
+        MV: {type: String, default: "No"},
+        RD: {type: String, default: "No"},
+    },
+    bio:{type: String, default: ""},
     token: {type:String, required: true},
     status: {type:String, required: true},
     password: {type: String, required: true}
