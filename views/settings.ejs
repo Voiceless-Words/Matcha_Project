@@ -20,25 +20,25 @@
         <h3 style="background: transparent; text-align: center;"> User Information</h3>
       </div>
       <div class="form-group col-md-6">
-        <label  for="firstname">First Name</label>
+        <label  for="firstname" style="color: black;">First Name</label>
         <input required type="text" class="form-control" id="firstname" name="firstname" value=<%= user.firstname %>>
       </div>
       <div class="form-group col-md-6">
-        <label  for="lastname">Last Name</label>
+        <label  for="lastname" style="color: black;">Last Name</label>
         <input required type="text" class="form-control" id="lastname" name="lastname" value=<%= user.lastname %>>
       </div>
       <div class="form-group col-md-6">
-        <label  for="email">Email</label>
+        <label  for="email" style="color: black;">Email</label>
         <input required type="text" class="form-control" id="email" name="email" value=<%= user.email %>>
       </div>
       <div class="form-group col-md-6">
-        <label  for="username">Username</label>
+        <label  for="username" style="color: black;">Username</label>
         <input required type="text" class="form-control" id="username" name="username" readonly value=<%= user.username %> >
       </div>
 
       <%if (user.genderPreference === "Both") { %>
         <div class="form-group col-md-6">
-          <label for="genderPreference">Gender Preference</label>
+          <label for="genderPreference" style="color: black;">Gender Preference</label>
           <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
             <option value="Both">Choose...</option>
             <option value="Male">Male</option>
@@ -48,7 +48,7 @@
         </div>
     <%} else if (user.genderPreference === "Male") {%>
       <div class="form-group col-md-6">
-        <label for="genderPreference">Gender Preference</label>
+        <label for="genderPreference" style="color: black;">Gender Preference</label>
         <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
           <option value="Both">Choose...</option>
           <option selected  value="Male">Male</option>
@@ -58,7 +58,7 @@
       </div>
     <%} else {%>
       <div class="form-group col-md-6">
-        <label for="genderPreference">Gender Preference</label>
+        <label for="genderPreference" style="color: black;">Gender Preference</label>
         <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
           <option value="Both">Choose...</option>
           <option value="Male">Male</option>
@@ -70,7 +70,7 @@
 
     <%if (user.gender === "Other") { %>
       <div class="form-group col-md-6">
-        <label for="gender">Gender</label>
+        <label for="gender" style="color: black;">Gender</label>
         <select class="form-control col-md-6" id="gender" name="gender">
           <option  value="Other">Choose...</option>
           <option value="Male">Male</option>
@@ -80,7 +80,7 @@
       </div>
     <%} else if (user.gender === "Male") {%>
       <div class="form-group col-md-6">
-        <label for="gender">Gender</label>
+        <label for="gender" style="color: black;">Gender</label>
         <select class="form-control col-md-6" id="gender" name="gender">
           <option value="Other">Choose...</option>
           <option selected value="Male">Male</option>
@@ -90,7 +90,7 @@
       </div>
     <%} else {%>
       <div class="form-group col-md-6">
-        <label for="gender">Gender</label>
+        <label for="gender" style="color: black;">Gender</label>
         <select class="form-control col-md-6" id="gender" name="gender">
           <option value="Other">Choose...</option>
           <option value="Male">Male</option>
@@ -107,13 +107,13 @@
       <div class="form-group col-md-4">
         <input type="hidden" id="LPHidden" name="LP" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="LPCheck" name="LP" value="on" checked onclick="CkeckLP();">
-        <label class="form-check-label" for="LPCheck">Live Perfomances</label>
+        <label class="form-check-label" for="LPCheck" style="color: black;">Live Perfomances</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="LPHidden" name="LP" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="LPCheck" name="LP" value="on" onclick="CkeckLP();">
-        <label class="form-check-label" for="LPCheck">Live Perfomances</label>
+        <label class="form-check-label" for="LPCheck" style="color: black;">Live Perfomances</label>
       </div>
     <%}%>
 
@@ -121,13 +121,13 @@
       <div class="form-group col-md-4">
         <input type="hidden" id="NOHidden" name="NO" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="NOCheck" name="NO" checked>
-        <label class="form-check-label" for="NOCheck">Nature Outdoor</label>
+        <label class="form-check-label" for="NOCheck" style="color: black;">Nature Outdoor</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="NOHidden" name="NO" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="NOCheck" name="NO">
-        <label class="form-check-label" for="NOCheck">Nature Outdoor</label>
+        <label class="form-check-label" for="NOCheck" style="color: black;">Nature Outdoor</label>
       </div>
     <%}%>
 
@@ -135,13 +135,13 @@
       <div class="form-group col-md-4">
         <input type="hidden" id="LWHidden" name="LW" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="LWCheck" name="LW" checked onclick="CkeckLW();"/>
-        <label class="form-check-label" for="LWCheck">Long Walks</label>
+        <label class="form-check-label" for="LWCheck" style="color: black;">Long Walks</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="LWHidden" name="LW" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="LWCheck" name="LW" onclick="CkeckLW();"/>
-        <label class="form-check-label" for="LWCheck">Long Walks</label>
+        <label class="form-check-label" for="LWCheck" style="color: black;">Long Walks</label>
       </div>
     <%}%>
 
@@ -149,13 +149,13 @@
       <div class="form-group col-md-4">
         <input type="hidden" id="SEHidden" name="SE" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="SECheck" name="SE" checked onclick="CkeckSE();"/>
-        <label class="form-check-label" for="SECheck">Sports Events</label>
+        <label class="form-check-label" for="SECheck" style="color: black;">Sports Events</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="SEHidden" name="SE" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="SECheck" name="SE" onclick="CkeckSE();"/>
-        <label class="form-check-label" for="SECheck">Sports Events</label>
+        <label class="form-check-label" for="SECheck" style="color: black;">Sports Events</label>
       </div>
     <%}%>
 
@@ -163,13 +163,13 @@
       <div class="form-group col-md-4">
         <input type="hidden" id="MVHidden" name="MV" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="MVCheck" name="MV" checked onclick="CkeckMV();"/>
-        <label class="form-check-label" for="MVCheck">Movies</label>
+        <label class="form-check-label" for="MVCheck" style="color: black;">Movies</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="MVHidden" name="MV" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="MVCheck" name="MV" onclick="CkeckMV();"/>
-        <label class="form-check-label" for="MVCheck">Movies</label>
+        <label class="form-check-label" for="MVCheck" style="color: black;">Movies</label>
       </div>
     <%}%>
 
@@ -177,15 +177,24 @@
       <div class="form-group col-md-4">
         <input type="hidden" id="RDHidden" name="RD" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="RDCheck" name="RD" checked onclick="CkeckRD();"/>
-        <label class="form-check-label" for="RDCheck">Reading</label>
+        <label class="form-check-label" for="RDCheck" style="color: black;">Reading</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="RDHidden" name="RD" value="off" disabled>
         <input type="checkbox" class="form-check-input" id="RDCheck" name="RD" onclick="CkeckRD();"/>
-        <label class="form-check-label" for="RDCheck">Reading</label>
+        <label class="form-check-label" for="RDCheck" style="color: black;">Reading</label>
       </div>
     <%}%>
+
+    <div>
+      <h3  style="background: transparent; text-align: center;"> Select Images</h3>
+    </div>
+
+    <div class="form-group col-md-12">
+      <input type="file" class="form-control" id="img" name="images" accept="image/*" multiple>    
+    </div>
+    
 
       <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Save Changes">
     </form>
