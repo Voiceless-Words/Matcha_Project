@@ -44,6 +44,7 @@ app.get('/', function(req, res){
 });
 
 function checkSignedIn(req, res, next){
+  console.log(req.session.user);
   if(req.session.user){
     next();
   }else{
@@ -79,7 +80,16 @@ app.get('/sign_up', function(req, res){
 
 //settings route
 app.get('/settings', function(req, res){
-  res.render('settings', {user: req.session.user});
+
+  Users.findOne({username:req.session.user.username}, (err, doc) =>{
+    if (err){
+      console.log("Error trying to find settings", err)
+    } else {
+      console.log(doc);
+      res.render('settings', {user: doc});
+    }
+  });
+
 });
 
 //resend the verify link
@@ -391,8 +401,6 @@ app.post('/setup', function(req, res) {
       console.log("When trying to update", err);
     }
     else {
-      console.log(doc, "&&&&&");
-      req.session.user = doc;
       res.redirect('/settings');
     }
   });

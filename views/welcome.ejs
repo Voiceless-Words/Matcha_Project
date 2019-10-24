@@ -36,7 +36,7 @@
 
       <div class="form-group col-md-6">
       <label for="genderPreference">Gender Preference</label>
-      <select class="form-control col-md-6" id="genderPreference">
+      <select class="form-control col-md-6" id="genderPreference" name="genderPreference">
         <option selected value="Both">Choose...</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
@@ -46,7 +46,7 @@
 
     <div class="form-group col-md-6">
       <label for="gender">Gender</label>
-      <select class="form-control col-md-6" id="gender">
+      <select class="form-control col-md-6" id="gender"  name="gender">
         <option selected value="Other">Choose...</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
@@ -57,30 +57,30 @@
         <h3  style="background: transparent; text-align: center;"> Select Interests</h3>
       </div>
       <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Live Perfomances</label>
+        <input type="checkbox" class="form-check-input" id="LPCheck" name="LP">
+        <label class="form-check-label" for="LPCheck">Live Perfomances</label>
       </div>
       <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Nature Outdoor</label>
-      </div>
-
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Long Walks</label>
-      </div>
-      <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Sports Events</label>
+        <input type="checkbox" class="form-check-input" id="NOCheck" name="NO">
+        <label class="form-check-label" for="NOCheck">Nature Outdoor</label>
       </div>
 
       <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Movies</label>
+        <input type="checkbox" class="form-check-input" id="LWCheck" name="LW">
+        <label class="form-check-label" for="LWCheck">Long Walks</label>
       </div>
       <div class="form-check col-md-4">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Reading</label>
+        <input type="checkbox" class="form-check-input" id="SECheck" name="SE">
+        <label class="form-check-label" for="SECheck">Sports Events</label>
+      </div>
+
+      <div class="form-check col-md-4">
+        <input type="checkbox" class="form-check-input" id="MVCheck" name="MV">
+        <label class="form-check-label" for="MVCheck">Movies</label>
+      </div>
+      <div class="form-check col-md-4">
+        <input type="checkbox" class="form-check-input" id="RDCheck" name="RD">
+        <label class="form-check-label" for="RDCheck">Reading</label>
       </div>
       <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Save Changes">
     </form>
