@@ -19,7 +19,9 @@ var userSchema = new Schema({
     bio:{type: String, default: ""},
     token: {type:String, required: true},
     status: {type:String, required: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    profileImage: {type:String},
+    images:[{type:String}]
 });
 
 userSchema.pre('save', function(next){

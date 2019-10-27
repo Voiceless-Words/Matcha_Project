@@ -53,9 +53,53 @@ function checkSignedIn(req, res, next){
   }
 }
 
+function interestsIf(req, res){
+  let ints = [];
+
+  if (req.session.user.NO == "on"){
+    ints.push({NO:"on"});
+  }
+
+  if (req.session.user.LP == "on"){
+    ints.push({LP:"on"});
+  }
+
+  if (req.session.user.LW == "on"){
+    ints.push({LW:"on"});
+  }
+
+  if (req.session.user.RD == "on"){
+    ints.push({RD:"on"});
+  }
+
+  if (req.session.user.MV == "on"){
+    ints.push({MV:"on"});
+  }
+
+  if (req.session.user.SE == "on"){
+    ints.push({SE:"on"});
+  }
+
+  return ints;
+}
 //home route
-app.get('/home', checkSignedIn, function(req, res){
-  res.render('home');
+app.get('/home', checkSignedIn, async function(req, res){
+
+  let interest = interestsIf(req, res);
+  let match = [];
+  
+  await Users.find({$or : interest}, (err, matches) => {
+    if (err){
+      console.log("When trying to find matches", err);
+    }
+
+    if (matches.length != 0){
+      match = matches;
+    }
+  });
+
+  console.log(match);
+  res.render('home', {"match": match});
 });
 
 //welcome route
