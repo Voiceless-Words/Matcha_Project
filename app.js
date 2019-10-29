@@ -7,6 +7,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt-nodejs');
 const nodeMailer = require('nodemailer');
 const tokenGen = require('uuid-token-generator');
+const faker = require('faker');
 
 //DB connect
 mongoose.set('useCreateIndex', true);
@@ -88,15 +89,17 @@ app.get('/home', checkSignedIn, async function(req, res){
   let interest = interestsIf(req, res);
   let match = [];
   
-  await Users.find({$and:[{username: {$ne: req.session.user.username}}, {$or : interest}]}, (err, matches) => {
-    if (err){
-      console.log("When trying to find matches", err);
-    }
+  if (interest.length != 0){
+    await Users.find({$and:[{username: {$ne: req.session.user.username}}, {$or : interest}]}, (err, matches) => {
+      if (err){
+        console.log("When trying to find matches", err);
+      }
 
-    if (matches.length != 0){
-      match = matches;
-    }
-  });
+      if (matches.length != 0){
+        match = matches;
+      }
+    });
+  }
 
   console.log(match);
   res.render('home', {"match": match});
@@ -478,55 +481,53 @@ app.get('/logout', function(req, res){
 
 app.get('/addusers', function(req, res){
   //generate data
-  let gender = [ 'female' , 'male', 'other' ];
+  let genders = [ 'Female' , 'Male', 'Other' ];
   let genderPreference = [ 'Female' , 'Male', 'Both'];
   var gender;
   for(var i = 0; i < 30; i++)
   {
       var j = 0;
       var interests = [];
-      while (j < 3){
+      /*while (j < 3){
         var item = faker.random.arrayElement(helper.interests());
         if (interests.indexOf(item) == -1){
           interests.push(item);
           j++;
         }
-      }
+      }*/      
       gender = faker.random.arrayElement(genders);
-      sexuality = faker.random.arrayElement(sexual_prefs);
+      sexuality = faker.random.arrayElement(genderPreference);
       // console.log("++++++++++++++++++++> " + sexuality);
       new_user = {
-          firstName : faker.name.firstName(gender),
-          lastName : faker.name.lastName(),
+          firstname : faker.name.firstName(gender),
+          lastname : faker.name.lastName(),
           email : faker.internet.email(),
           username : faker.internet.userName(),
-          birthDate :faker.date.between('1930-01-01', '2001-12-31'),
           age : faker.random.number({'min': 16, 'max': 50}),
           gender : gender,
           bio : faker.lorem.sentence(),
           password : 'Password@1',
           // security_key : key,
-          loc_long : faker.address.longitude(),
-          loc_lati : faker.address.latitude(),
+          longitude : faker.address.longitude(),
+          latitude : faker.address.latitude(),
           pic : faker.internet.avatar(gender),
           interests : interests,
-          sexuality : sexuality,
-          completeProfile : 1,
-          verified : 1,
+          genderPreference: sexuality,
+          status : "2",
           date : String( new Date()),
           active : 1
       };
       // console.log(new_user);
-       User.create( new_user, function(err, doc) {
+       Users.create( new_user, function(err, doc) {
           // console.log(doc);
-          var history = new History({
+          /*var history = new History({
             userId: doc._id,
             likes: [],
             views: []
           });
           history.save(function (err) {
           if (err) console.log(err);
-          });
+          });*/
             if (err){
               console.log(err);
             }
@@ -534,6 +535,7 @@ app.get('/addusers', function(req, res){
   }
   res.send("done");
 })
+
 app.listen(3000, function(){
     console.log("Our server has started on port 3000");
 });

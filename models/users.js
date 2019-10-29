@@ -17,11 +17,15 @@ var userSchema = new Schema({
     MV: {type: String, default: "No"},
     RD: {type: String, default: "No"},
     bio:{type: String, default: ""},
-    token: {type:String, required: true},
+    token: {type:String},
     status: {type:String, required: true},
     password: {type: String, required: true},
     profileImage: {type:String},
-    images:[{type:String}]
+    images:[{type:String}],
+    active: {type:String},
+    date: {type:Date, default:Date.now()},
+    age: {type:Number},
+    interets: []
 });
 
 userSchema.pre('save', function(next){
