@@ -475,6 +475,65 @@ app.get('/logout', function(req, res){
   });
 });
 
+
+app.get('/addusers', function(req, res){
+  //generate data
+  let gender = [ 'female' , 'male', 'other' ];
+  let genderPreference = [ 'Female' , 'Male', 'Both'];
+  var gender;
+  for(var i = 0; i < 30; i++)
+  {
+      var j = 0;
+      var interests = [];
+      while (j < 3){
+        var item = faker.random.arrayElement(helper.interests());
+        if (interests.indexOf(item) == -1){
+          interests.push(item);
+          j++;
+        }
+      }
+      gender = faker.random.arrayElement(genders);
+      sexuality = faker.random.arrayElement(sexual_prefs);
+      // console.log("++++++++++++++++++++> " + sexuality);
+      new_user = {
+          firstName : faker.name.firstName(gender),
+          lastName : faker.name.lastName(),
+          email : faker.internet.email(),
+          username : faker.internet.userName(),
+          birthDate :faker.date.between('1930-01-01', '2001-12-31'),
+          age : faker.random.number({'min': 16, 'max': 50}),
+          gender : gender,
+          bio : faker.lorem.sentence(),
+          password : 'Password@1',
+          // security_key : key,
+          loc_long : faker.address.longitude(),
+          loc_lati : faker.address.latitude(),
+          pic : faker.internet.avatar(gender),
+          interests : interests,
+          sexuality : sexuality,
+          completeProfile : 1,
+          verified : 1,
+          date : String( new Date()),
+          active : 1
+      };
+      // console.log(new_user);
+       User.create( new_user, function(err, doc) {
+          // console.log(doc);
+          var history = new History({
+            userId: doc._id,
+            likes: [],
+            views: []
+          });
+          history.save(function (err) {
+          if (err) console.log(err);
+          });
+            if (err){
+              console.log(err);
+            }
+       });
+  }
+  res.send("done");
+})
 app.listen(3000, function(){
     console.log("Our server has started on port 3000");
 });

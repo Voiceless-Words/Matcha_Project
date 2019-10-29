@@ -120,13 +120,13 @@
     <% if (user.NO === "on") {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="NOHidden" name="NO" value="off" disabled>
-        <input type="checkbox" class="form-check-input" id="NOCheck" name="NO" checked>
+        <input type="checkbox" class="form-check-input" id="NOCheck" name="NO" value="on" checked onclick="CkeckNO();">
         <label class="form-check-label" for="NOCheck" style="color: black;">Nature Outdoor</label>
       </div>
     <%} else {%>
       <div class="form-group col-md-4">
         <input type="hidden" id="NOHidden" name="NO" value="off" disabled>
-        <input type="checkbox" class="form-check-input" id="NOCheck" name="NO">
+        <input type="checkbox" class="form-check-input" id="NOCheck" name="NO" value="on" onclick="CkeckNO();">
         <label class="form-check-label" for="NOCheck" style="color: black;">Nature Outdoor</label>
       </div>
     <%}%>
