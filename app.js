@@ -88,7 +88,7 @@ app.get('/home', checkSignedIn, async function(req, res){
   let interest = interestsIf(req, res);
   let match = [];
   
-  await Users.find({$or : interest}, (err, matches) => {
+  await Users.find({$and:[{username: {$ne: req.session.user.username}}, {$or : interest}]}, (err, matches) => {
     if (err){
       console.log("When trying to find matches", err);
     }
