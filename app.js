@@ -89,6 +89,7 @@ app.get('/home', checkSignedIn, async function(req, res){
   let interest = interestsIf(req, res);
   let match = [];
   
+  console.log("interesss>>>>>>>", interest);
   if (interest.length != 0){
     await Users.find({$and:[{username: {$ne: req.session.user.username}}, {$or : interest}]}, (err, matches) => {
       if (err){
@@ -535,6 +536,14 @@ app.get('/addusers', function(req, res){
   }
   res.send("done");
 })
+
+app.get('/delete', (req, res) => {
+  Users.deleteMany({bio: {$ne: ""}}, (err, docs) => {
+    if (err){
+      console.log("While trying to delete", err);
+    }
+  });
+});
 
 app.listen(3000, function(){
     console.log("Our server has started on port 3000");

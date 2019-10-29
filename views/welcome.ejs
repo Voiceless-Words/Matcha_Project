@@ -82,9 +82,23 @@
         <input type="checkbox" class="form-check-input" id="RDCheck" name="RD">
         <label class="form-check-label" for="RDCheck">Reading</label>
       </div>
+
+      <div class="form-group col-md-6" id="lon">
+        <label  for="longitude">Longitude</label>
+        <input required type="text" class="form-control" id="longitude" name="latitude" readonly value=<%= user.longitude %> >
+      </div>
+
+      <div class="form-group col-md-6" id="lat">
+        <label  for="latitude">Latitude</label>
+        <input required type="text" class="form-control" id="latitude" name="latitude" readonly value=<%= user.latitude %> >
+      </div>
+      <button type="button" class="btn btn-lg btn-info" onclick="showPosition();">Get Location</button>
       <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Save Changes">
     </form>
   </div>
 </header>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/location.js"></script>
 </body>
 </html>
