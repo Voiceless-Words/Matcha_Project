@@ -2,23 +2,6 @@ const router = require('express').Router();
 const Users = require('../models/users');
 const commonFunction = require('./commonFunctions');
 
-
-//use welcome page
-router.use('/welcome', function(err, req, res, next){
-    res.render('login', {message: "Please make sure you are logged in"});
-});
-  
-//use home page
-router.use('/home', function(err, req, res, next){
-    res.render('login', {message: "Please make sure you are logged in"});
-});
-
-//use settings page
-router.use('/settings', function(err, req, res, next){
-    console.log(err);
-    res.render('login', {message: "Please make sure you are logged in"});
-});
-
 //posting information on settings
 router.post('/setup', function(req, res) {
     console.log("BODY &&&&&&&&&",req.body);
@@ -36,15 +19,15 @@ router.post('/setup', function(req, res) {
 });
 
 //settings route
-router.get('/settings', function(req, res){
+router.get('/settings', commonFunction.checkSignedIn, function(req, res){
 
     Users.findOne({username:req.session.user.username}, (err, doc) =>{
-      if (err){
+    if (err){
         console.log("Error trying to find settings", err)
-      } else {
+    } else {
         console.log(doc);
         res.render('settings', {user: doc});
-      }
+    }
     });
   
 });

@@ -6,8 +6,7 @@ exports.checkSignedIn  = (req, res, next) => {
     if(req.session.user){
       next();
     }else{
-      let err = new Error("Not logged in!");
-      next(err);
+    res.render('login', {message: "Please make sure you are logged in"});
     }
 }
   

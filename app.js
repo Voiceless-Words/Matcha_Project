@@ -43,6 +43,22 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
+//use welcome page
+app.use('/welcome', function(err, req, res, next){
+  res.render('login', {message: "Please make sure you are logged in"});
+});
+
+//use home page
+app.use('/home', function(err, req, res, next){
+  res.render('login', {message: "Please make sure you are logged in"});
+});
+
+//use settings page
+app.use('/settings', function(err, req, res, next){
+  console.log(err);
+  res.render('login', {message: "Please make sure you are logged in"});
+});
+
 //users routes controller
 app.use('/', usersRoute);
 
