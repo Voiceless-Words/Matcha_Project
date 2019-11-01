@@ -1,12 +1,14 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
+const session = require('express-session');
 const dotenv = require('dotenv').config();
 const usersRoute = require('./routes/users');
 const fakerRoute = require('./routes/fakerRoute');
 const profileRoute = require('./routes/profileSetup');
-const session = require('express-session');
+
+const app = express();
 
 //DB connect
 mongoose.set('useCreateIndex', true);
@@ -20,9 +22,6 @@ mongoose.connect("mongodb+srv://hyper:thabisoPassword@matchacluster-e6mcr.mongod
   }
 });
 
-
-const app = express();
-
 app.use(session({
 secret: process.env.SECRET, // session secret
 resave: false,
@@ -35,13 +34,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-
 //set public folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', function(req, res){
-    res.render('index');
-});
 
 //use welcome page
 app.use('/welcome', function(err, req, res, next){
@@ -68,6 +62,11 @@ app.use('/', profileRoute);
 //fake users routes controller
 app.use('/fake', fakerRoute);
 
+//handle the routes that are not found
+app.use(function(req, res) {
+  res.redirect('/');
+});
+
 //logout route
 app.get('/logout', function(req, res){
   req.session.destroy(function(){
@@ -76,10 +75,14 @@ app.get('/logout', function(req, res){
   });
 });
 
+//home route
+app.get('/', function(req, res){
+  res.render('index');
+});
+
+//start the server
 app.listen(3000, function(){
     console.log("Our server has started on port 3000");
 });
 
-app.use(function(req, res) {
-    res.redirect('/');
-});
+

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt-nodejs');
 const tokenGen = require('uuid-token-generator');
+const dotenv = require('dotenv').config();
 const Users = require('../models/users');
 const commonFunction = require('./commonFunctions');
-const dotenv = require('dotenv').config();
 
 //recover Password
 router.get('/recover', function(req, res){
