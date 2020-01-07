@@ -163,7 +163,7 @@ router.post('api/register', function(req, res){
                           console.log(err);
                       }else{
                           commonFunction.sendEmail(req.body.email, "Verify your account",
-                          '<a href="http://localhost:3001/verify?token='+ tkn + '">Click Here</a>');
+                          '<a href="http://localhost:3000/verify?token='+ tkn + '">Click Here</a>');
                          res.status(200).send(doc);
                       }
                   });
