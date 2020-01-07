@@ -143,6 +143,7 @@ router.post('api/register', function(req, res){
             Users.findOne({'email': req.body.email}, function(err, user1){
               if(err){
                 console.log(err);
+                res.status(400).send({"User": "Could not connect to the database"});
               }else {
                 console.log(user1);
                 if (!user1){
@@ -162,17 +163,17 @@ router.post('api/register', function(req, res){
                           console.log(err);
                       }else{
                           commonFunction.sendEmail(req.body.email, "Verify your account",
-                          '<a href="http://localhost:3000/verify?token='+ tkn + '">Click Here</a>');
+                          '<a href="http://localhost:3001/verify?token='+ tkn + '">Click Here</a>');
                          res.status(200).send(doc);
                       }
                   });
                 }else {
-                  res.status(404).send({"User": "Email already exists"});
+                  res.status(400).send({"User": "Email already exists"});
                 }
               }
               });
               }else {
-                res.status(404).send({"User": "Username already exists"});
+                res.status(400).send({"User": "Username already exists"});
                 }
             }
             });
