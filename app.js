@@ -7,6 +7,7 @@ const dotenv = require('dotenv').config();
 const usersRoute = require('./routes/users');
 const fakerRoute = require('./routes/fakerRoute');
 const profileRoute = require('./routes/profileSetup');
+const cors = require('cors');
 
 const app = express();
 
@@ -61,6 +62,10 @@ app.use('/', profileRoute);
 
 //fake users routes controller
 app.use('/fake', fakerRoute);
+
+app.use(cors({
+  origin: 'http://localhost:3001'
+}));
 
 //logout route
 app.get('/logout', function(req, res){
