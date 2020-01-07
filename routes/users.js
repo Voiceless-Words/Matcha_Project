@@ -133,7 +133,7 @@ router.post('/resend', function(req, res){
 //sign up post
 router.post('api/register', function(req, res){
   
-    if (req.body.first_name && req.body.last_name && req.body.username && req.body.email && req.body.password){
+    if (req.body.fname && req.body.lname && req.body.username && req.body.email && req.body.password && req.body.age){
       Users.findOne({'username': req.body.username}, function(err, user){
         if (err)
         {
@@ -150,8 +150,9 @@ router.post('api/register', function(req, res){
                   const tokgen = new tokenGen(256, tokenGen.BASE62);
                   let tkn = tokgen.generate();
                   let user = {
-                  firstname: req.body.first_name,
-                  lastname: req.body.last_name,
+                  firstname: req.body.fname,
+                  lastname: req.body.lname,
+                  age: req.body.age,
                   username: req.body.username,
                   email: req.body.email,
                   token: tkn,
