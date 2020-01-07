@@ -62,11 +62,6 @@ app.use('/', profileRoute);
 //fake users routes controller
 app.use('/fake', fakerRoute);
 
-//handle the routes that are not found
-app.use(function(req, res) {
-  res.redirect('/');
-});
-
 //logout route
 app.get('/logout', function(req, res){
   req.session.destroy(function(){
@@ -84,5 +79,8 @@ app.get('/', function(req, res){
 app.listen(3000, function(){
     console.log("Our server has started on port 3000");
 });
-
+//handle the routes that are not found
+app.use(function(req, res) {
+  res.redirect('/');
+});
 
