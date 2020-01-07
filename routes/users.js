@@ -143,7 +143,7 @@ router.post('api/register', function(req, res){
             Users.findOne({'email': req.body.email}, function(err, user1){
               if(err){
                 console.log(err);
-                res.status(400).send({"User": "Could not connect to the database"});
+                res.status(500).send({"User": "Could not connect to the database"});
               }else {
                 console.log(user1);
                 if (!user1){
@@ -179,7 +179,7 @@ router.post('api/register', function(req, res){
             }
             });
     }else {
-      res.status(400).send({"User": "PLease make sure that all the required field are filled"});
+      res.status(400).send({"User": "Please make sure that all the required field are filled"});
     }
 });
   
