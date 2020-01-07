@@ -131,7 +131,7 @@ router.post('/resend', function(req, res){
 });
   
 //sign up post
-router.post('/sign_up', function(req, res){
+router.post('api/register', function(req, res){
   
     if (req.body.first_name && req.body.last_name && req.body.username && req.body.email && req.body.password){
       Users.findOne({'username': req.body.username}, function(err, user){
@@ -163,21 +163,21 @@ router.post('/sign_up', function(req, res){
                       }else{
                           commonFunction.sendEmail(req.body.email, "Verify your account",
                           '<a href="http://localhost:3000/verify?token='+ tkn + '">Click Here</a>');
-                         res.render('sign_up', {message: "The user account was created successfully check email to verify the account"});
+                         res.status(200).send(doc);
                       }
                   });
                 }else {
-                  res.render('sign_up', {message: "The email already exists"});
+                  res.status(404).send({"User": "Email already exists"});
                 }
               }
               });
               }else {
-                  res.render('sign_up', {message: "The user already exists"});
+                res.status(404).send({"User": "Username already exists"});
                 }
             }
             });
     }else {
-      res.render('sign_up', {message: "PLease make sure that all the required field are filled"});
+      res.status(400).send({"User": "PLease make sure that all the required field are filled"});
     }
 });
   
