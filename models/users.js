@@ -21,7 +21,7 @@ var userSchema = new Schema({
     status: {type:String, required: true},
     password: {type: String, required: true},
     profileImage: {type:String},
-    images:[{type:String}],
+    images:[{contentType:{type:String}, img: {type:Buffer}}],
     active: {type:String},
     date: {type:Date, default:Date.now()},
     age: {type:Number},

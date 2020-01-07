@@ -8,6 +8,9 @@ const bcrypt = require('bcrypt-nodejs');
 const nodeMailer = require('nodemailer');
 const tokenGen = require('uuid-token-generator');
 const faker = require('faker');
+const multer = require('multer');
+const fs = require('fs-extra');
+const upload = multer({limits: {fileSize:2000000}, dest:'/uploads/'});
 
 //DB connect
 mongoose.set('useCreateIndex', true);
@@ -439,19 +442,28 @@ app.post('/login', function(req, res){
 
 
 //posting information on settings
-app.post('/setup', function(req, res) {
+app.post('/setup', upload.single('images'), function(req, res) {
   console.log("BODY &&&&&&&&&",req.body);
 
-  const {...updateData } = req.body;
-  Users.findOneAndUpdate ({username: req.body.username}, updateData, {new: true}, function(err, doc) {
-    if (err)
-    {
-      console.log("When trying to update", err);
-    }
-    else {
-      res.redirect('/settings');
-    }
-  });
+  if (req.file == null){
+    console.log("are we here ??/??/");
+    res.render('settings', {message: "you did not select any picture idiot", user:req.session.user});
+  }else {
+    const newImg = fs.readFileSync(req.file.path);
+    const encImg = newImg.toString('base64');
+    const image = {"contentType": req.file.mimetype, "img": Buffer(encImg, 'base64')};
+    const {...updateData } = req.body;
+    updateData.images = image;
+    Users.findOneAndUpdate ({username: req.body.username}, updateData, {new: true}, function(err, doc) {
+      if (err)
+      {
+        console.log("When trying to update", err);
+      }
+      else {
+        res.redirect('/settings');
+      }
+    });
+  }
 });
 
 
